@@ -6,8 +6,15 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
+
+const Offer = {
+  OFFERS_COUNT: 13,
+};
+
 root.render(
   <React.StrictMode>
-    <App />
+    <App
+      offersCount = {Offer.OFFERS_COUNT}
+    />
   </React.StrictMode>,
 );
