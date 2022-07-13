@@ -8,7 +8,7 @@ const root = ReactDOM.createRoot(
 
 
 const Offer = {
-  OFFERS_COUNT: 13,
+  OFFERS_COUNT: 9,
 };
 
 root.render(
