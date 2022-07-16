@@ -1,13 +1,14 @@
 import PlaceCard from '../../components/place-card/place-card';
 import Header from '../../components/header/header';
-// import Error404Screen from '../../pages/404/404';
+import {Offers} from '../../types/offer';
 
 type MainScreenProps = {
   offersCount: number;
+  offers: Offers;
 }
 
 
-function MainScreen({offersCount}: MainScreenProps): JSX.Element {
+function MainScreen({offersCount, offers}: MainScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -71,8 +72,10 @@ function MainScreen({offersCount}: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-
-                {Array.from({length: offersCount}, (value,i) => <PlaceCard key={i}/>)}
+                {/*
+                {Array.from({length: offersCount}, (value,i) => <PlaceCard key={i} offer = {offers[0]} />)}
+                */}
+                <PlaceCard offer = {offers[0]} />
 
               </div>
             </section>
