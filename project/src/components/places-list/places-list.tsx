@@ -2,11 +2,11 @@ import React from 'react';
 import {Offer, Offers} from '../../types/offer';
 import PlaceCard from '../place-card/place-card';
 
-type PlacesListProps = {
+type ListProps = {
   offers: Offers;
 }
 
-function PlacesList({offers}: PlacesListProps): JSX.Element {
+function PlacesList({offers}: ListProps): JSX.Element {
   return (
     <React.Fragment>
       {offers.map((offer: Offer) => <PlaceCard key={offer.id} offer={offer} />)}

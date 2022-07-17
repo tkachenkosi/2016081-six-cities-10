@@ -72,9 +72,7 @@ function MainScreen({offersCount, offers}: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {/*
-                {Array.from({length: offersCount}, (value,i) => <PlaceCard key={i} offer = {offers[0]} />)}
-                */}
+
                 <PlacesList offers = {offers} />
 
               </div>
