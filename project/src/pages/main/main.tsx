@@ -1,4 +1,4 @@
-import PlaceCard from '../../components/place-card/place-card';
+import PlacesList from '../../components/places-list/places-list';
 import Header from '../../components/header/header';
 import {Offers} from '../../types/offer';
 
@@ -75,7 +75,7 @@ function MainScreen({offersCount, offers}: MainScreenProps): JSX.Element {
                 {/*
                 {Array.from({length: offersCount}, (value,i) => <PlaceCard key={i} offer = {offers[0]} />)}
                 */}
-                <PlaceCard offer = {offers[0]} />
+                <PlacesList offers = {offers} />
 
               </div>
             </section>

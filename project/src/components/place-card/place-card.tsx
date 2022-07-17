@@ -7,7 +7,6 @@ type PropertyCardProps = {
 }
 
 function PlaceCard({offer}: PropertyCardProps): JSX.Element {
-  console.log(offer.previewImage);
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
