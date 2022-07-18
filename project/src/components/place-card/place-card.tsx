@@ -1,3 +1,4 @@
+import {useState, MouseEvent} from 'react';
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
 
@@ -7,6 +8,13 @@ type PropertyCardProps = {
 }
 
 function PlaceCard({offer}: PropertyCardProps): JSX.Element {
+  const [isFavorite, setFavorite] = useState<boolean>(offer.isFavorite);
+
+  const onFavoriteClick = (evt: MouseEvent<HTMLButtonElement>) => {
+    evt.preventDefault();
+    setFavorite(!isFavorite);
+  };
+
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
@@ -23,7 +31,7 @@ function PlaceCard({offer}: PropertyCardProps): JSX.Element {
             <b className="place-card__price-value">&euro;120</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
+          <button onClick={onFavoriteClick} className="place-card__bookmark-button button" type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>

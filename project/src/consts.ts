@@ -12,3 +12,10 @@ export enum AuthorizationStatus {
   Unrnown = 'UNKKNOWN'
 }
 
+
+export enum ReviewLimits {
+  MaxCommentPerPage = 10,
+  MinCharactersComment = 50,
+  MaxCharactersComment = 300,
+}
+
