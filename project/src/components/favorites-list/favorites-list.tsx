@@ -1,10 +1,10 @@
 
 import React from 'react';
-import {Offer, Offers} from '../../types/offer';
+import {Offer} from '../../types/offer';
 import FavoriteCard from '../favorite-card/favorite-card';
 
 type ListProps = {
-  offers: Offers;
+  offers: Offer[];
 }
 
 function FavoritesList({offers}: ListProps): JSX.Element {

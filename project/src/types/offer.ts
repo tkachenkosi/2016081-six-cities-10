@@ -56,8 +56,8 @@ export type NewReview = {
 };
 
 
-export type Offers = Offer[];
-export type Reviews = Review[];
+// export type Offers = Offer[];
+// export type Reviews = Review[];
 
 /*
 
@@ -69,8 +69,8 @@ type          Тип жилья
 isFavorite    Избранное
 rating        Рейтинг
 
-bedrooms      Фотографии
-bedrooms      Подробное описание
+images        Фотографии
+description   Подробное описание
 bedrooms      Количество спален
 maxAdults     Максимальное количество гостей
 goods         Список бытовых предметов в квартире

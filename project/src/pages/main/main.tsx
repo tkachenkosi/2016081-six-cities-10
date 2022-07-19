@@ -1,10 +1,10 @@
 import PlacesList from '../../components/places-list/places-list';
 import Header from '../../components/header/header';
-import {Offers} from '../../types/offer';
+import {Offer} from '../../types/offer';
 
 type MainScreenProps = {
   offersCount: number;
-  offers: Offers;
+  offers: Offer[];
 }
 
 
