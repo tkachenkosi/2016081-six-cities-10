@@ -2,10 +2,10 @@ import {Link} from 'react-router-dom';
 import {AppRoute} from '../../consts';
 import FavorotesList from '../../components/favorites-list/favorites-list';
 import Header from '../../components/header/header';
-import {Offers} from '../../types/offer';
+import {Offer} from '../../types/offer';
 
 type FavoritesScreenProps = {
-  offers: Offers;
+  offers: Offer[];
 }
 
 

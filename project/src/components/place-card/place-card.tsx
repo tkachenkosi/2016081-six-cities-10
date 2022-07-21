@@ -7,16 +7,26 @@ type PropertyCardProps = {
   offer: Offer;
 }
 
+
 function PlaceCard({offer}: PropertyCardProps): JSX.Element {
-  const [isFavorite, setFavorite] = useState<boolean>(offer.isFavorite);
+  const [isFavorite, setFavorite] = useState(offer.isFavorite);
+  // const [idOffer, setIdOffer] = useState(offer.id);
 
   const onFavoriteClick = (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
     setFavorite(!isFavorite);
   };
 
+  const onMouseEnterHandle = () => {
+    // setIdOffer(idOffer);
+  };
+
+  const onMouseOutHandle = () => {
+    // setIdOffer(-1);
+  };
+
   return (
-    <article className="cities__card place-card">
+    <article onMouseEnter={onMouseEnterHandle} onMouseOut={onMouseOutHandle} className="cities__card place-card">
       <div className="place-card__mark">
         <span>Premium</span>
       </div>

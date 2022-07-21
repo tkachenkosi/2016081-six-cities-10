@@ -6,12 +6,12 @@ import PropertyScreen from '../../pages/property/property';
 import LoginScreen from '../../pages/login/login';
 import Error404Screen from '../../pages/404/404';
 import PrivateRoute from '../../components/private-route/private-route';
-import {Offers} from '../../types/offer';
+import {Offer} from '../../types/offer';
 
 
 type AppScreenProps = {
   offersCount: number;
-  offers: Offers;
+  offers: Offer[];
 }
 
 function App({offersCount, offers}: AppScreenProps): JSX.Element {

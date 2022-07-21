@@ -1,10 +1,11 @@
 import PlacesList from '../../components/places-list/places-list';
+import MyMap from '../../components/map/map';
 import Header from '../../components/header/header';
-import {Offers} from '../../types/offer';
+import {Offer} from '../../types/offer';
 
 type MainScreenProps = {
   offersCount: number;
-  offers: Offers;
+  offers: Offer[];
 }
 
 
@@ -72,13 +73,14 @@ function MainScreen({offersCount, offers}: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-
-                <PlacesList offers = {offers} />
+                <PlacesList offers={offers} />
 
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <MyMap offers={offers} selectedOffer={offers[0]} />
+              </section>
             </div>
           </div>
         </div>
@@ -88,3 +90,4 @@ function MainScreen({offersCount, offers}: MainScreenProps): JSX.Element {
 }
 
 export default MainScreen;
+
