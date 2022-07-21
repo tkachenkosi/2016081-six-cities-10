@@ -26,11 +26,6 @@ function MyMap({offers, selectedOffer}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, offers[0].city);
 
-  console.log('len -3->>', offers.length);
-  console.log('city -3->>', offers[0].city);
-  console.log('ref -3->>', mapRef);
-  console.log('map -3->>', map);
-
   useEffect(() => {
     if (map) {
 
@@ -51,9 +46,7 @@ function MyMap({offers, selectedOffer}: MapProps): JSX.Element {
   }, [map, offers, selectedOffer]);
 
   return (
-    // <section className="cities__map map" ref={mapRef} style={{height: '100%'}}></section>
     <div ref={mapRef} style={{height: '100%'}}></div>
-    // <div ref={mapRef}></div>
   );
 
 }
