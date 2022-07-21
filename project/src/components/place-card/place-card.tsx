@@ -10,7 +10,7 @@ type PropertyCardProps = {
 
 function PlaceCard({offer}: PropertyCardProps): JSX.Element {
   const [isFavorite, setFavorite] = useState(offer.isFavorite);
-  const [idOffer, setIdOffer] = useState(offer.id);
+  // const [idOffer, setIdOffer] = useState(offer.id);
 
   const onFavoriteClick = (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
@@ -18,11 +18,11 @@ function PlaceCard({offer}: PropertyCardProps): JSX.Element {
   };
 
   const onMouseEnterHandle = () => {
-    setIdOffer(idOffer);
+    // setIdOffer(idOffer);
   };
 
   const onMouseOutHandle = () => {
-    setIdOffer(-1);
+    // setIdOffer(-1);
   };
 
   return (
