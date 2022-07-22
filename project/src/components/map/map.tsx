@@ -22,7 +22,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function MyMap({offers, selectedOffer}: MapProps): JSX.Element {
+function MapOffers({offers, selectedOffer}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, offers[0].city);
 
@@ -51,5 +51,5 @@ function MyMap({offers, selectedOffer}: MapProps): JSX.Element {
 
 }
 
-export default MyMap;
+export default MapOffers;
 
