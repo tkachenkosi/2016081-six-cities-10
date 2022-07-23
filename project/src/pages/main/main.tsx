@@ -1,5 +1,5 @@
 import PlacesList from '../../components/places-list/places-list';
-import MyMap from '../../components/map/map';
+import MapOffers from '../../components/map/map';
 import Header from '../../components/header/header';
 import {Offer} from '../../types/offer';
 
@@ -7,7 +7,6 @@ type MainScreenProps = {
   offersCount: number;
   offers: Offer[];
 }
-
 
 function MainScreen({offersCount, offers}: MainScreenProps): JSX.Element {
   return (
@@ -79,7 +78,7 @@ function MainScreen({offersCount, offers}: MainScreenProps): JSX.Element {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <MyMap offers={offers} selectedOffer={offers[0]} />
+                <MapOffers offers={offers} selectedOffer={offers[0]} />
               </section>
             </div>
           </div>
