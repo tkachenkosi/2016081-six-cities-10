@@ -15,19 +15,6 @@ type PropertyScreenProps = {
   reviews: Review[];
 }
 
-/*
-function showImagesOffer(images: string[]): JSX.Element {
-  return (
-    <>
-      {images.map((image: string) => {
-        <div className="property__image-wrapper">
-          <img className="property__image" src={image} alt="Photo" />
-        </div>;
-      })}
-    </>
-  );
-}
-*/
 function PropertyScreen({offers, reviews}: PropertyScreenProps): JSX.Element {
   const params = useParams();
   const offersNear: Offer[] = offers.filter((i) => i.id !== Number(params.id));
