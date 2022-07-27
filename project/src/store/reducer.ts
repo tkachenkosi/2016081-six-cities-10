@@ -1,18 +1,20 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {selectCity} from './action';
+import {setSelectCity} from './action';
+import {DataStore} from '../types/state';
 import {CITIES} from '../consts';
 
-const FIRST_CITY = CITIES.Paris;
+// const FIRST_CITY = 0;
 
-const initialState = {
-  city: FIRST_CITY,
+const initialState: DataStore = {
+  selectedCity: CITIES.Paris,
+  filterOffers: [],
 };
 
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(selectCity, (state) => {
-      state.city = FIRST_CITY;
+    .addCase(setSelectCity, (state, action) => {
+      state.selectedCity = action.payload;
     });
 });
 
