@@ -5,6 +5,7 @@ import App from './components/app/app';
 import {offers} from './mocks/offers';
 import {reviews} from './mocks/reviews';
 import {store} from './store/index';
+import {setOffers} from './store/action';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -14,6 +15,8 @@ const root = ReactDOM.createRoot(
 const Offer = {
   OFFERS_COUNT: 9,
 };
+
+store.dispatch(setOffers(offers));
 
 root.render(
   <React.StrictMode>
