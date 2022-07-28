@@ -1,6 +1,7 @@
 import React from 'react';
 import {Offer} from '../../types/offer';
 import PlaceCard from '../place-card/place-card';
+// import {useAppSelector} from '../../hooks';
 
 type ListProps = {
   offers: Offer[];
@@ -10,6 +11,8 @@ type ListProps = {
 // </ React.Fragment>
 
 function PlacesList({offers}: ListProps): JSX.Element {
+  // const dataOffers = useAppSelector((state) => state.filterOffers);
+  // console.log('-->',offers);
   return (
     <>
       {offers.map((offer: Offer) => <PlaceCard key={offer.id} offer={offer} />)}
