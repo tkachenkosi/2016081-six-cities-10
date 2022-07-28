@@ -1,15 +1,17 @@
 import PlacesList from '../../components/places-list/places-list';
 import MapOffers from '../../components/map/map';
 import Header from '../../components/header/header';
+import MainEmpty from '../../components/main-empty/main-empty';
 import Locations from '../../components/locations/locations';
 import {Offer} from '../../types/offer';
+import {useAppSelector} from '../../hooks';
 
-type MainScreenProps = {
-  offersCount: number;
-  offers: Offer[];
-}
 
-function MainScreen({offersCount, offers}: MainScreenProps): JSX.Element {
+function MainScreen(): JSX.Element {
+  const selectCity = useAppSelector((state) => state.selectedCity);
+  const filteredOffers: Offer[] = useAppSelector((state) => state.offers).filter((offer) => offer.city.name === selectCity);
+  const offersCount = filteredOffers.length;
+
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -23,7 +25,7 @@ function MainScreen({offersCount, offers}: MainScreenProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersCount} places to stay in Amsterdam</b>
+              <b className="places__found">{offersCount} places to stay in {selectCity}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -40,13 +42,13 @@ function MainScreen({offersCount, offers}: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlacesList offers={offers} />
+                {offersCount === 0 ? <MainEmpty /> : <PlacesList offers={filteredOffers} />}
 
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <MapOffers offers={offers} selectedOffer={offers[0]} />
+                {offersCount > 0 && <MapOffers offers={filteredOffers} selectedOffer={filteredOffers[0]} />}
               </section>
             </div>
           </div>

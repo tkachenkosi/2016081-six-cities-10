@@ -3,7 +3,7 @@ import {Offer} from '../types/offer';
 
 export const setSelectCity = createAction('city/setSelectCity', (value: string) => ({payload: value}));
 export const setOffers = createAction('city/setOffers', (value: Offer[]) => ({payload: value}));
-export const setFilterOffers = createAction('city/setFilterOffer');
+// export const setFilterOffers = createAction('city/setFilterOffer');
 
 /*
 configureStore — функция, предназначенная упростить процесс создания и настройки хранилища

@@ -12,9 +12,9 @@ const root = ReactDOM.createRoot(
 );
 
 
-const Offer = {
-  OFFERS_COUNT: 9,
-};
+// const Offer = {
+//   OFFERS_COUNT: 9,
+// };
 
 store.dispatch(setOffers(offers));
 
@@ -22,7 +22,7 @@ root.render(
   <React.StrictMode>
     <Provider store = {store}>
       <App
-        offersCount = {Offer.OFFERS_COUNT}
+        // offersCount = {Offer.OFFERS_COUNT}
         offers = {offers}
         reviews = {reviews}
       />
