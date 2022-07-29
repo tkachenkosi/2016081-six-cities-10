@@ -3,6 +3,7 @@ export const RATING_STEP = 20;
 export enum AppRoute {
   Root = '/',
   Login = '/login',
+  Logout = '/logout',
   Favorites = '/favorites',
   Room = '/offer/:id'
 }
@@ -11,7 +12,7 @@ export enum AppRoute {
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
-  Unrnown = 'UNKKNOWN'
+  Unknown = 'UNKKNOWN'
 }
 
 
