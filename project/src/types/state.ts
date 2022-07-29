@@ -8,4 +8,5 @@ export type AppDispatch = typeof store.dispatch;
 export type DataStore = {
   selectedCity: string,
   offers: Offer[],
+  sortType: string,
 };

@@ -76,7 +76,7 @@ export const offers: Offer[] = [
     'maxAdults': 4,
     'previewImage': 'img/room.jpg',
     'price': 80,
-    'rating': 4.8,
+    'rating': 2.8,
     'title': 'Wood and stone place',
     'type': 'Private room'
   }, {
@@ -114,7 +114,7 @@ export const offers: Offer[] = [
     'maxAdults': 4,
     'previewImage': 'img/apartment-02.jpg',
     'price': 132,
-    'rating': 4.8,
+    'rating': 1.8,
     'title': 'Canal View Prinsengracht',
     'type': 'apartment'
   }, {
@@ -152,7 +152,7 @@ export const offers: Offer[] = [
     'maxAdults': 4,
     'previewImage': 'img/apartment-03.jpg',
     'price': 120,
-    'rating': 4.8,
+    'rating': 3.8,
     'title': 'Nice, cozy, warm big bed apartment',
     'type': 'apartment'
   },
