@@ -17,6 +17,7 @@ const root = ReactDOM.createRoot(
 // };
 
 store.dispatch(setOffers(offers));
+// store.dispatch(loadOffers());
 
 root.render(
   <React.StrictMode>
