@@ -1,12 +1,13 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {setSelectCity, setOffers} from './action';
+import {setSelectCity, setOffers, changeSort} from './action';
 import {DataStore} from '../types/state';
-import {CITIES} from '../consts';
+import {CITIES, SortType} from '../consts';
 
 
 const initialState: DataStore = {
   selectedCity: CITIES.Paris,
   offers: [],
+  sortType: SortType.POPULAR,
 };
 
 
@@ -17,7 +18,11 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffers, (state, action) => {
       state.offers = action.payload;
-      // state.filterOffers = filterOffers(state.offers, state.selectedCity);
+    })
+    .addCase(changeSort, (state, action) => {
+      if (state.sortType !== action.payload) {
+        state.sortType = action.payload;
+      }
     });
 });
 

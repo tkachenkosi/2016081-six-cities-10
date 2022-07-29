@@ -1,3 +1,5 @@
+export const RATING_STEP = 20;
+
 export enum AppRoute {
   Root = '/',
   Login = '/login',
@@ -33,5 +35,12 @@ export const CITIES = {
   Amsterdam: 'Amsterdam',
   Hamburg: 'Hamburg',
   Dusseldorf: 'Dusseldorf',
+};
+
+export const SortType = {
+  POPULAR: 'Popular',
+  PRICE_TO_HIGH: 'Price: low to high',
+  PRICE_TO_LOW: 'Price: high to low',
+  TOP: 'Top rated first',
 };
 

@@ -1,6 +1,7 @@
 
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
+import {calcRating} from '../../utils';
 
 
 type CardProps = {
@@ -21,7 +22,7 @@ function FavoriteCard({offer}: CardProps): JSX.Element {
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;180</b>
+            <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
@@ -33,7 +34,7 @@ function FavoriteCard({offer}: CardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: '100%'}}></span>
+            <span style={{width: calcRating(offer.rating)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

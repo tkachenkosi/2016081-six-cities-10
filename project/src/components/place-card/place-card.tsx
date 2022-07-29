@@ -1,6 +1,7 @@
 import {useState, MouseEvent} from 'react';
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
+import {calcRating} from '../../utils';
 
 
 type PropertyCardProps = {
@@ -38,7 +39,7 @@ function PlaceCard({offer}: PropertyCardProps): JSX.Element {
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;120</b>
+            <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button onClick={onFavoriteClick} className="place-card__bookmark-button button" type="button">
@@ -50,7 +51,7 @@ function PlaceCard({offer}: PropertyCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: '80%'}}></span>
+            <span style={{width: calcRating(offer.rating)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
