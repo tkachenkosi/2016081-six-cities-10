@@ -7,6 +7,8 @@ export const setOffers = createAction('city/setOffers', (value: Offer[]) => ({pa
 export const changeSort = createAction('sort/changeSort', (value: string) => ({payload: value}));
 export const loadOffers = createAction<Offer[]>('data/loadOffers');
 export const requireAuthorization = createAction<AuthorizationStatus>('user/AuthorizationStatus');
+export const setError = createAction<string | null>('game/setError');
+export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
 
 /*
 configureStore — функция, предназначенная упростить процесс создания и настройки хранилища

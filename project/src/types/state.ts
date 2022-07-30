@@ -11,4 +11,6 @@ export type DataStore = {
   offers: Offer[],
   sortType: string,
   authorizationStatus: AuthorizationStatus,
+  isDataLoaded: boolean,
+  error: string | null,
 };

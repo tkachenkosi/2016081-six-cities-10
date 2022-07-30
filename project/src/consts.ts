@@ -1,13 +1,12 @@
 export const RATING_STEP = 20;
+export const TIMEOUT_SHOW_ERROR = 2000;
 
 export enum AppRoute {
   Root = '/',
   Login = '/login',
-  Logout = '/logout',
   Favorites = '/favorites',
   Room = '/offer/:id'
 }
-
 
 export enum AuthorizationStatus {
   Auth = 'AUTH',
@@ -15,13 +14,32 @@ export enum AuthorizationStatus {
   Unknown = 'UNKKNOWN'
 }
 
-
 export enum ReviewLimits {
   MaxCommentPerPage = 10,
   MinCharactersComment = 50,
   MaxCharactersComment = 300,
 }
 
+export enum APIRoute {
+  Offers = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
+  Nearby = '/nearby',
+  Favorite = '/favorites',
+  Reviews = '/comments',
+}
+
+export enum HttpCode {
+  BadRequest = 400,
+  Unauthorized = 401,
+  NotFound = 404,
+}
+
+export enum StorageKey {
+  AuthToken = 'six-cities-token',
+  UserAvatar = 'six-cities-user-avatar-url',
+  UserEmail = 'six-cities-user-email',
+}
 
 export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
 
