@@ -2,14 +2,14 @@ import {Link} from 'react-router-dom';
 import {AppRoute} from '../../consts';
 import FavorotesList from '../../components/favorites-list/favorites-list';
 import Header from '../../components/header/header';
+import {useAppSelector} from '../../hooks';
 import {Offer} from '../../types/offer';
 
-type FavoritesScreenProps = {
-  offers: Offer[];
-}
 
+function FavoritesScreen(): JSX.Element {
+  const selectCity = useAppSelector((state) => state.selectedCity);
+  const filteredOffers: Offer[] = useAppSelector((state) => state.offers).filter((offer) => offer.city.name === selectCity);
 
-function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
   return (
     <div className="page">
       <Header />
@@ -28,7 +28,7 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <FavorotesList offers = {offers} />
+                  <FavorotesList offers = {filteredOffers} />
                 </div>
               </li>
 

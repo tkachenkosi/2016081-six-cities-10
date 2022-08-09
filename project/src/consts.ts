@@ -20,30 +20,20 @@ export enum ReviewLimits {
   MaxCharactersComment = 300,
 }
 
-export enum APIRoute {
-  Offers = '/hotels',
-  Login = '/login',
-  Logout = '/logout',
-  Nearby = '/nearby',
-  Favorite = '/favorites',
-  Reviews = '/comments',
-}
-
 export enum HttpCode {
   BadRequest = 400,
   Unauthorized = 401,
   NotFound = 404,
 }
 
-export enum StorageKey {
-  AuthToken = 'six-cities-token',
-  UserAvatar = 'six-cities-user-avatar-url',
-  UserEmail = 'six-cities-user-email',
+export enum TokenKey {
+  Auth = 'six-cities-token',
+  Avatar = 'six-cities-user-avatarurl',
+  Email = 'six-cities-user-email',
 }
 
-export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
-
-export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+// export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+// export const url_marker_current = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
 
 // export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
@@ -63,3 +53,10 @@ export const SortType = {
   TOP: 'Top rated first',
 };
 
+
+export enum MarkerUrl {
+  // Default = 'img/pin.svg',
+  // Selected = 'img/pin-active.svg',
+  Default = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
+  Selected = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg',
+}
