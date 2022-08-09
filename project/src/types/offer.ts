@@ -35,7 +35,6 @@ export type Offer = {
   type: string;
 };
 
-
 export type Review = {
   comment: string
   date: string
@@ -54,33 +53,3 @@ export type NewReview = {
   comment: string,
   rating: number,
 };
-
-
-// export type Offers = Offer[];
-// export type Reviews = Review[];
-
-/*
-
-previewImage  Изображение
-isPremium     Премиальность
-price         Стоимость за ночь
-title         Заголовок
-type          Тип жилья
-isFavorite    Избранное
-rating        Рейтинг
-
-images        Фотографии
-description   Подробное описание
-bedrooms      Количество спален
-maxAdults     Максимальное количество гостей
-goods         Список бытовых предметов в квартире
-host          Информация о хозяине
-
-Аватар автора.
-Имя автора.
-Оценку. Оценка выводится в виде закрашенных звезд.
-Дата отзыва в формате: Месяц Год. Например: April 2019.
-Текст отзыва.
-
-*/
-
