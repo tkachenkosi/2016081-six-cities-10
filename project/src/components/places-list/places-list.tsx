@@ -5,15 +5,16 @@ import PlaceCard from '../place-card/place-card';
 
 type ListProps = {
   offers: Offer[];
+  selectMapOffer: (offer: Offer | null) => void;
 }
 
 // <React.Fragment>
 // </ React.Fragment>
 
-function PlacesList({offers}: ListProps): JSX.Element {
+function PlacesList({offers, selectMapOffer}: ListProps): JSX.Element {
   return (
     <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer: Offer) => <PlaceCard key={offer.id} offer={offer} />)}
+      {offers.map((offer: Offer) => <PlaceCard key={offer.id} offer={offer} selectMapOffer={selectMapOffer} />)}
     </div>
   );
 }

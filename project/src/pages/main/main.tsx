@@ -1,6 +1,5 @@
 import PlaceContainer from '../../components/place-container/place-container';
 import Header from '../../components/header/header';
-// import PlacesList from '../../components/places-list/places-list';
 import MainEmpty from '../../components/main-empty/main-empty';
 import Locations from '../../components/locations/locations';
 import {Offer} from '../../types/offer';
@@ -12,7 +11,6 @@ function MainScreen(): JSX.Element {
   const selectCity = useAppSelector((state) => state.selectedCity);
   const filteredOffers: Offer[] = useAppSelector((state) => state.offers).filter((offer) => offer.city.name === selectCity);
   const offersCount = filteredOffers.length;
-  // const isOffers: boolean = offersCount > 0;
 
   switch (useAppSelector((state) => state.sortType)) {
     case SortType.PRICE_TO_HIGH:

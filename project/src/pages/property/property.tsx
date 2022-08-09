@@ -6,19 +6,21 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import NearList from '../../components/near-list/near-list';
 import ImagesGallery from '../../components/images-gallery/images-gallery';
 import MapOffers from '../../components/map/map';
+import {useAppSelector} from '../../hooks';
 import {Offer} from '../../types/offer';
 import {Review} from '../../types/offer';
 
 
 type PropertyScreenProps = {
-  offers: Offer[];
   reviews: Review[];
 }
 
-function PropertyScreen({offers, reviews}: PropertyScreenProps): JSX.Element {
+function PropertyScreen({reviews}: PropertyScreenProps): JSX.Element {
+  const selectCity = useAppSelector((state) => state.selectedCity);
+  const filteredOffers: Offer[] = useAppSelector((state) => state.offers).filter((offer) => offer.city.name === selectCity);
   const params = useParams();
-  const offersNear: Offer[] = offers.filter((i) => i.id !== Number(params.id));
-  const offerSelect: Offer = offers.filter((i) => i.id === Number(params.id))[0];
+  const offersNear: Offer[] = filteredOffers.filter((i) => i.id !== Number(params.id));
+  const offerSelect: Offer = filteredOffers.filter((i) => i.id === Number(params.id))[0];
   const {title, price, images} = offerSelect;
 
   return (
@@ -136,7 +138,7 @@ function PropertyScreen({offers, reviews}: PropertyScreenProps): JSX.Element {
             </div>
           </div>
           <section className="property__map map">
-            <MapOffers offers={offers} selectedOffer={offers[0]} />
+            <MapOffers offers={filteredOffers} selectedOffer={filteredOffers[0]} />
           </section>
         </section>
         <div className="container">

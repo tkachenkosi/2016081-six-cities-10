@@ -1,4 +1,4 @@
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../consts';
 import MainScreen from '../../pages/main/main';
 import FavoritesScreen from '../../pages/favorites/favorites';
@@ -7,33 +7,31 @@ import LoginScreen from '../../pages/login/login';
 import LoadingScreen from '../loading-screen/loading-screen';
 import Error404Screen from '../../pages/404/404';
 import PrivateRoute from '../../components/private-route/private-route';
-import {Offer} from '../../types/offer';
 import {Review} from '../../types/offer';
 import {useAppSelector} from '../../hooks';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 type AppScreenProps = {
-  // offersCount: number;
-  offers: Offer[];
   reviews: Review[];
 }
 
 
-const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
+const isUnknownAuthStatus = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 
-// function App({offersCount, offers, reviews}: AppScreenProps): JSX.Element {
-function App({offers, reviews}: AppScreenProps): JSX.Element {
+function App({reviews}: AppScreenProps): JSX.Element {
 
   const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
 
-  if (isCheckedAuth(authorizationStatus) || isDataLoaded) {
+  if (isUnknownAuthStatus(authorizationStatus) || isDataLoaded) {
     return (
       <LoadingScreen />
     );
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Root}
@@ -43,13 +41,13 @@ function App({offers, reviews}: AppScreenProps): JSX.Element {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
-              <FavoritesScreen offers = {offers} />
+              <FavoritesScreen />
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Room}
-          element={<PropertyScreen offers={offers} reviews={reviews} />}
+          element={<PropertyScreen reviews={reviews} />}
         />
         <Route
           path={AppRoute.Login}
@@ -60,7 +58,7 @@ function App({offers, reviews}: AppScreenProps): JSX.Element {
           element={<Error404Screen />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

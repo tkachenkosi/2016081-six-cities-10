@@ -6,10 +6,11 @@ import {calcRating} from '../../utils';
 
 type PropertyCardProps = {
   offer: Offer;
+  selectMapOffer: (offer: Offer | null) => void;
 }
 
 
-function PlaceCard({offer}: PropertyCardProps): JSX.Element {
+function PlaceCard({offer, selectMapOffer}: PropertyCardProps): JSX.Element {
   const [isFavorite, setFavorite] = useState(offer.isFavorite);
   // const [idOffer, setIdOffer] = useState(offer.id);
 
@@ -20,10 +21,13 @@ function PlaceCard({offer}: PropertyCardProps): JSX.Element {
 
   const onMouseEnterHandle = () => {
     // setIdOffer(idOffer);
+    selectMapOffer(offer);
+
   };
 
   const onMouseOutHandle = () => {
     // setIdOffer(-1);
+    selectMapOffer(null);
   };
 
   return (

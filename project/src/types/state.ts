@@ -1,5 +1,5 @@
 import {store} from '../store/index.js';
-import {Offer} from './offer';
+import {Offer, Review} from './offer';
 import {AuthorizationStatus} from '../consts';
 
 export type State = ReturnType<typeof store.getState>;
