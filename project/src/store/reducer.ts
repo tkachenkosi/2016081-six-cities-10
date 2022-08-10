@@ -1,7 +1,6 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {setSelectCity, setOffers, changeSort, loadOffers, requireAuthorization, setError, setDataLoadedStatus} from './action';
+import {setSelectCity, setOffers, changeSort, loadOffers, loadReviews, requireAuthorization, setError, setDataLoadedStatus} from './action';
 import {DataStore} from '../types/state';
-// import {Offer} from '../types/offer';
 import {CITIES, SortType, AuthorizationStatus} from '../consts';
 
 
@@ -12,6 +11,7 @@ const initialState: DataStore = {
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoaded: false,
   error: null,
+  reviews: [],
 };
 
 
@@ -25,6 +25,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
+    })
+    .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;

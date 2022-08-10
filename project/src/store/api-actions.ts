@@ -1,12 +1,12 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.js';
-import {loadOffers, requireAuthorization, setError, setDataLoadedStatus} from './action';
+import {loadOffers, loadReviews, requireAuthorization, setError, setDataLoadedStatus} from './action';
 import {saveToken, setToken, dropToken} from '../services/token';
 import {AuthorizationStatus, TIMEOUT_SHOW_ERROR, TokenKey} from '../consts';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
-import {Offer} from '../types/offer';
+import {Offer, Review} from '../types/offer';
 import {store} from './';
 
 export enum APIRoute {
@@ -30,6 +30,18 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
     dispatch(setDataLoadedStatus(true));
     dispatch(loadOffers(data));
     dispatch(setDataLoadedStatus(false));
+  },
+);
+
+export const fetchReviewsAction = createAsyncThunk<void, string | undefined, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'data/fetchReviews',
+  async (offerId, {dispatch, extra: api}) => {
+    const {data} = await api.get<Review[]>(`${APIRoute.Reviews}/${offerId}`);
+    dispatch(loadReviews(data));
   },
 );
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReviewForm from '../../components/form/form';
 import {useParams} from 'react-router-dom';
 import Header from '../../components/header/header';
@@ -6,22 +6,34 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import NearList from '../../components/near-list/near-list';
 import ImagesGallery from '../../components/images-gallery/images-gallery';
 import MapOffers from '../../components/map/map';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector, useAppDispatch} from '../../hooks';
+import {fetchReviewsAction} from '../../store/api-actions';
 import {Offer} from '../../types/offer';
 import {Review} from '../../types/offer';
+import {AuthorizationStatus} from '../../consts';
 
 
-type PropertyScreenProps = {
-  reviews: Review[];
-}
+// type PropertyScreenProps = {
+//   reviews: Review[];
+// }
 
-function PropertyScreen({reviews}: PropertyScreenProps): JSX.Element {
+// function PropertyScreen({reviews}: PropertyScreenProps): JSX.Element {
+function PropertyScreen(): JSX.Element {
   const selectCity = useAppSelector((state) => state.selectedCity);
   const filteredOffers: Offer[] = useAppSelector((state) => state.offers).filter((offer) => offer.city.name === selectCity);
+
   const params = useParams();
+  const dispatch = useAppDispatch();
+  const reviews: Review[] = useAppSelector((state) => state.reviews);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
   const offersNear: Offer[] = filteredOffers.filter((i) => i.id !== Number(params.id));
   const offerSelect: Offer = filteredOffers.filter((i) => i.id === Number(params.id))[0];
   const {title, price, images} = offerSelect;
+
+  useEffect(() => {
+    dispatch(fetchReviewsAction(params.id));
+  }, [params.id]);
 
   return (
     <div className="page">
@@ -132,7 +144,7 @@ function PropertyScreen({reviews}: PropertyScreenProps): JSX.Element {
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <ReviewsList reviews={reviews} />
-                <ReviewForm />
+                {authorizationStatus === AuthorizationStatus.Auth && <ReviewForm />}
 
               </section>
             </div>
