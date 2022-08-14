@@ -3,7 +3,7 @@ import leaflet from 'leaflet';
 import {Icon, LayerGroup} from 'leaflet';
 import useMap from '../../hooks/useMap/useMap';
 import {Offer} from '../../types/offer';
-import {MarkerUrl} from '../../consts';
+import {MarkerUrl, INIT_CITY} from '../../consts';
 import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
@@ -26,12 +26,15 @@ const currentCustomIcon = new Icon({
 
 function MapOffers({offers, selectedOffer}: MapProps): JSX.Element {
   const mapRef = useRef(null);
-  const map = useMap(mapRef, offers[0].city);
-  const {latitude, longitude, zoom } = offers[0].city.location;
+  const centerMap = offers.length > 0 ? offers[0].city : INIT_CITY;
+  const map = useMap(mapRef, centerMap);
+  const {latitude, longitude, zoom } = centerMap.location;
+
 
   useEffect(() => {
     let layer: LayerGroup;
     if (map) {
+      map.scrollWheelZoom.disable();
       layer = new LayerGroup().addTo(map);
 
       offers.forEach((offer) => {
@@ -49,14 +52,14 @@ function MapOffers({offers, selectedOffer}: MapProps): JSX.Element {
       map.flyTo([latitude, longitude], zoom);
     }
 
-    return () => {
-      layer?.clearLayers();
-    };
+    // return () => {
+    //   layer?.clearLayers();
+    // };
 
   }, [map, offers, selectedOffer]);
 
   return (
-    <section className="cities__map map" style={{height: '100%'}} ref={mapRef}>
+    <section style={{height: '100%'}} ref={mapRef}>
     </section>
   );
 

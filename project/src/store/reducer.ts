@@ -1,17 +1,20 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {setSelectCity, setOffers, changeSort, loadOffers, loadReviews, requireAuthorization, setError, setDataLoadedStatus} from './action';
+import {setSelectCity, setOffers, changeSort, loadOffers, loadNearbyOffers, loadRoomOffer, loadReviews, requireAuthorization, setError, setDataLoadedStatus, changeFavoritStatus} from './action';
 import {DataStore} from '../types/state';
-import {CITIES, SortType, AuthorizationStatus} from '../consts';
+import {CITIES, SortType, AuthorizationStatus, INIT_OFFER} from '../consts';
 
 
 const initialState: DataStore = {
   selectedCity: CITIES.Paris,
   offers: [],
+  roomOffer: INIT_OFFER,
   sortType: SortType.POPULAR,
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoaded: false,
   error: null,
   reviews: [],
+  nearbyOffers: [],
+  favoriteOffers: [],
 };
 
 
@@ -25,6 +28,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
+    })
+    .addCase(loadNearbyOffers, (state, action) => {
+      state.nearbyOffers = action.payload;
+    })
+    .addCase(loadRoomOffer, (state, action) => {
+      state.roomOffer = action.payload;
     })
     .addCase(loadReviews, (state, action) => {
       state.reviews = action.payload;
@@ -42,6 +51,13 @@ const reducer = createReducer(initialState, (builder) => {
       if (state.sortType !== action.payload) {
         state.sortType = action.payload;
       }
+    })
+    .addCase(changeFavoritStatus, (state, action) => {
+      if (!action.payload.isFavorite) {
+        state.favoriteOffers = state.favoriteOffers.filter((offer) => offer.id !== action.payload.id);
+      }
+      const index = state.offers.findIndex((offer) => offer.id === action.payload.id);
+      state.offers = [...state.offers.slice(0, index), action.payload, ...state.offers.slice(index + 1), ];
     });
 });
 

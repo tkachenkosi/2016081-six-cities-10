@@ -1,4 +1,5 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
+// import React from 'react';
 import ReviewForm from '../../components/form/form';
 import {useParams} from 'react-router-dom';
 import Header from '../../components/header/header';
@@ -6,34 +7,46 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import NearList from '../../components/near-list/near-list';
 import ImagesGallery from '../../components/images-gallery/images-gallery';
 import MapOffers from '../../components/map/map';
-import {useAppSelector, useAppDispatch} from '../../hooks';
-import {fetchReviewsAction} from '../../store/api-actions';
-import {Offer} from '../../types/offer';
-import {Review} from '../../types/offer';
+// import {useAppSelector, useAppDispatch} from '../../hooks';
+import {useAppSelector} from '../../hooks';
+// import {fetchReviewsAction, fetchNearbyOffersAction, fetchRoomOfferAction} from '../../store/api-actions';
+import {fetchReviewsAction, fetchNearbyOffersAction, fetchRoomOfferAction} from '../../store/api-actions';
+import {Offer, Review} from '../../types/offer';
 import {AuthorizationStatus} from '../../consts';
+import {calcRating} from '../../utils';
+import {store} from '../../store/index';
 
 
-// type PropertyScreenProps = {
-//   reviews: Review[];
-// }
+// <section className="property__map map">
+// {setTimeout(() => {nearbyOffers.length > 0 && <MapOffers classMap={'property__map map'} offers={nearbyOffers} selectedOffer={offerSelect} />}, 1000)}
 
-// function PropertyScreen({reviews}: PropertyScreenProps): JSX.Element {
 function PropertyScreen(): JSX.Element {
-  const selectCity = useAppSelector((state) => state.selectedCity);
-  const filteredOffers: Offer[] = useAppSelector((state) => state.offers).filter((offer) => offer.city.name === selectCity);
-
   const params = useParams();
-  const dispatch = useAppDispatch();
-  const reviews: Review[] = useAppSelector((state) => state.reviews);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-
-  const offersNear: Offer[] = filteredOffers.filter((i) => i.id !== Number(params.id));
-  const offerSelect: Offer = filteredOffers.filter((i) => i.id === Number(params.id))[0];
-  const {title, price, images} = offerSelect;
-
+  // const dispatch = useAppDispatch();
+  // const selectCity = useAppSelector((state) => state.selectedCity);
+  // const filteredOffers: Offer[] = useAppSelector((state) => state.offers).filter((offer) => offer.city.name === selectCity);
+  // const offerSelect: Offer = filteredOffers.filter((i) => i.id === Number(params.id))[0];
+  // основной оффер
   useEffect(() => {
-    dispatch(fetchReviewsAction(params.id));
+    store.dispatch(fetchRoomOfferAction(params.id));
   }, [params.id]);
+  // комментарии
+  useEffect(() => {
+    store.dispatch(fetchReviewsAction(params.id));
+  }, [params.id]);
+  // офферы радом
+  useEffect(() => {
+    store.dispatch(fetchNearbyOffersAction(params.id));
+  }, [params.id]);
+
+  const [activeMapOffer, setActiveMapOffer] = useState<Offer | null>(null);
+  const selectMapOffer = useCallback((offer: Offer | null) => setActiveMapOffer(offer), []);
+
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const roomOffer: Offer = useAppSelector((state) => state.roomOffer);
+  const reviews: Review[] = useAppSelector((state) => state.reviews);
+  const nearbyOffers: Offer[] = useAppSelector((state) => state.nearbyOffers);
+  const {title, price, type, rating, images, goods, host, description, bedrooms, maxAdults, isPremium} = roomOffer;
 
   return (
     <div className="page">
@@ -48,9 +61,7 @@ function PropertyScreen(): JSX.Element {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              <div className="property__mark">
-                <span>Premium</span>
-              </div>
+              {isPremium && <div className="property__mark"><span>Premium</span></div>}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {title}
@@ -64,20 +75,20 @@ function PropertyScreen(): JSX.Element {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: '80%'}}></span>
+                  <span style={{width: calcRating(rating)}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">4.8</span>
+                <span className="property__rating-value rating__value">{rating}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  Apartment
+                  {type[0].toUpperCase() + type.slice(1)}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  3 Bedrooms
+                  {bedrooms} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max 4 adults
+                  Max {maxAdults} adults
                 </li>
               </ul>
               <div className="property__price">
@@ -87,57 +98,25 @@ function PropertyScreen(): JSX.Element {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  <li className="property__inside-item">
-                    Wi-Fi
-                  </li>
-                  <li className="property__inside-item">
-                    Washing machine
-                  </li>
-                  <li className="property__inside-item">
-                    Towels
-                  </li>
-                  <li className="property__inside-item">
-                    Heating
-                  </li>
-                  <li className="property__inside-item">
-                    Coffee machine
-                  </li>
-                  <li className="property__inside-item">
-                    Baby seat
-                  </li>
-                  <li className="property__inside-item">
-                    Kitchen
-                  </li>
-                  <li className="property__inside-item">
-                    Dishwasher
-                  </li>
-                  <li className="property__inside-item">
-                    Cabel TV
-                  </li>
-                  <li className="property__inside-item">
-                    Fridge
-                  </li>
+                  {goods.map((good) => <li key={good} className="property__inside-item">{good}</li>)}
                 </ul>
               </div>
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
+                  <div className={`property__avatar-wrapper ${host.isPro && 'property__avatar-wrapper--pro'} user__avatar-wrapper`}>
+                    <img className="property__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
-                    Angelina
+                    {host.name}
                   </span>
                   <span className="property__user-status">
-                    Pro
+                    {host.isPro && 'Pro'}
                   </span>
                 </div>
                 <div className="property__description">
                   <p className="property__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                  </p>
-                  <p className="property__text">
-                    An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
+                    {description}
                   </p>
                 </div>
               </div>
@@ -149,16 +128,17 @@ function PropertyScreen(): JSX.Element {
               </section>
             </div>
           </div>
+
           <section className="property__map map">
-            <MapOffers offers={filteredOffers} selectedOffer={filteredOffers[0]} />
+            {<MapOffers offers={nearbyOffers} selectedOffer={activeMapOffer} />}
           </section>
+
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-
-              <NearList offers={offersNear} />
+              <NearList offers={nearbyOffers} selectMapOffer={selectMapOffer} />
 
             </div>
           </section>
@@ -166,8 +146,8 @@ function PropertyScreen(): JSX.Element {
       </main>
     </div>
   );
-}
 
+}
 
 export default PropertyScreen;
 

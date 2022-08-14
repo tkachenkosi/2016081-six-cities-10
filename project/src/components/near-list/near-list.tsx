@@ -5,12 +5,13 @@ import NearCard from '../near-card/near-card';
 
 type ListProps = {
   offers: Offer[];
+  selectMapOffer: (offer: Offer | null) => void;
 }
 
-function NearList({offers}: ListProps): JSX.Element {
+function NearList({offers, selectMapOffer}: ListProps): JSX.Element {
   return (
     <>
-      {offers.map((offer: Offer) => <NearCard key={offer.id} offer={offer} />)}
+      {offers.map((offer: Offer) => <NearCard key={offer.id} offer={offer} selectMapOffer={selectMapOffer} />)}
     </>
   );
 }
