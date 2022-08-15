@@ -24,7 +24,9 @@ function PlaceContainer({filteredOffers, selectCity}: PlaceContainerProps): JSX.
 
       </section>
       <div className="cities__right-section">
-        <MapOffers offers={filteredOffers} selectedOffer={activeMapOffer} />
+        <section className="cities__map map">
+          <MapOffers offers={filteredOffers} selectedOffer={activeMapOffer} />
+        </section>
       </div>
     </div>
   );

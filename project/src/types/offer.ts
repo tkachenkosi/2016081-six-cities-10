@@ -35,21 +35,23 @@ export type Offer = {
   type: string;
 };
 
+export type User = {
+  id: number;
+  isPro: boolean;
+  name: string;
+  avatarUrl: string;
+}
+
 export type Review = {
-  comment: string
-  date: string
-  id: number
-  rating: number
-  user: {
-    avatarUrl: string
-    id: number
-    isPro: boolean
-    name: string
-  }
+  comment: string;
+  date: string;
+  id: number;
+  rating: number;
+  user: User;
 };
 
 export type NewReview = {
-  roomId: number | null,
-  comment: string,
-  rating: number,
+  offerId: number | null;
+  comment: string;
+  rating: number;
 };

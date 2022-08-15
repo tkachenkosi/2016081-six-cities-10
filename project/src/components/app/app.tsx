@@ -7,20 +7,15 @@ import LoginScreen from '../../pages/login/login';
 import LoadingScreen from '../loading-screen/loading-screen';
 import Error404Screen from '../../pages/404/404';
 import PrivateRoute from '../../components/private-route/private-route';
-import {Review} from '../../types/offer';
 import {useAppSelector} from '../../hooks';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
-
-type AppScreenProps = {
-  reviews: Review[];
-}
 
 
 const isUnknownAuthStatus = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 
-function App({reviews}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
 
   const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
 
@@ -38,7 +33,7 @@ function App({reviews}: AppScreenProps): JSX.Element {
           element={<MainScreen />}
         />
         <Route
-          path={AppRoute.Favorites}
+          path={AppRoute.Favorite}
           element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
               <FavoritesScreen />
@@ -47,7 +42,7 @@ function App({reviews}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Room}
-          element={<PropertyScreen reviews={reviews} />}
+          element={<PropertyScreen />}
         />
         <Route
           path={AppRoute.Login}

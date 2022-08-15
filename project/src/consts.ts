@@ -4,7 +4,7 @@ export const TIMEOUT_SHOW_ERROR = 2000;
 export enum AppRoute {
   Root = '/',
   Login = '/login',
-  Favorites = '/favorites',
+  Favorite = '/favorite',
   Room = '/offer/:id'
 }
 
@@ -16,8 +16,8 @@ export enum AuthorizationStatus {
 
 export enum ReviewLimits {
   MaxCommentPerPage = 10,
-  MinCharactersComment = 50,
-  MaxCharactersComment = 300,
+  MinChar = 50,
+  MaxChar = 300,
 }
 
 export enum HttpCode {
@@ -60,3 +60,47 @@ export enum MarkerUrl {
   Default = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
   Selected = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg',
 }
+
+export const INIT_CITY = {
+  name: 'Paris',
+  location: {
+    latitude: 52.370216,
+    longitude: 4.895168,
+    zoom: 10,
+  },
+};
+
+export const INIT_OFFER = {
+  city: {
+    name: '',
+    location: {
+      latitude: 0,
+      longitude: 0,
+      zoom: 10,
+    },
+  },
+  previewImage: '',
+  images: [],
+  title: '',
+  isFavorite: false,
+  isPremium: false,
+  rating: 0,
+  type: '  ',
+  bedrooms: 0,
+  maxAdults: 0,
+  price: 0,
+  goods: [],
+  host: {
+    id: 0,
+    name: '',
+    isPro: false,
+    avatarUrl: '',
+  },
+  description: '',
+  location: {
+    latitude: 0,
+    longitude: 0,
+    zoom: 10,
+  },
+  id: 666,
+};
