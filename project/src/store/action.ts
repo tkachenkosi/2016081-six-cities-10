@@ -12,6 +12,7 @@ export const loadNearbyOffers = createAction<Offer[]>('data/loadNearbyOffers');
 export const loadRoomOffer = createAction<Offer>('data/loadRoomOffer');
 export const changeFavoritStatus = createAction<Offer>('data/FavoriteStatus');
 export const loadReviews = createAction<Review[]>('data/loadReviews');
+export const addReview = createAction<Review[]>('data/addReview');
 export const requireAuthorization = createAction<AuthorizationStatus>('user/AuthorizationStatus');
 export const setError = createAction<string | null>('game/setError');
 export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');

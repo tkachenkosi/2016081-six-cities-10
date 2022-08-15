@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {setSelectCity, setOffers, changeSort, loadOffers, loadNearbyOffers, loadRoomOffer, loadReviews, requireAuthorization, setError, setDataLoadedStatus, changeFavoritStatus} from './action';
+import {setSelectCity, setOffers, changeSort, loadOffers, loadNearbyOffers, loadRoomOffer, loadReviews, requireAuthorization, setError, setDataLoadedStatus, changeFavoritStatus, addReview} from './action';
 import {DataStore} from '../types/state';
 import {CITIES, SortType, AuthorizationStatus, INIT_OFFER} from '../consts';
 
@@ -36,6 +36,9 @@ const reducer = createReducer(initialState, (builder) => {
       state.roomOffer = action.payload;
     })
     .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
+    })
+    .addCase(addReview, (state, action) => {
       state.reviews = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {

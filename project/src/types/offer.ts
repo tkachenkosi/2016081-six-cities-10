@@ -51,7 +51,7 @@ export type Review = {
 };
 
 export type NewReview = {
-  roomId: number | null;
+  offerId: number | null;
   comment: string;
   rating: number;
 };

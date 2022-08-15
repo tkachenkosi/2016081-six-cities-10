@@ -1,32 +1,35 @@
 import React, {useState, FormEvent, ChangeEvent} from 'react';
 import {useParams} from 'react-router-dom';
-// import {ReviewLimits} from '../../consts';
+import {ReviewLimits} from '../../consts';
+import {fetchAddReviewAction} from '../../store/api-actions';
+import {store} from '../../store/index';
 
 function ReviewForm(): JSX.Element {
   const params = useParams();
-
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(0);
-
 
   const onChangeRatingHandle = (evt: ChangeEvent<HTMLInputElement>) => {
     setRating(Number(evt.target.value));
   };
 
-
   const onChangeCommentHandle = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(evt.target.value);
   };
 
-  const onSubmitHandle = (evt: FormEvent<HTMLButtonElement>) => {
+  const onSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    // console.log(comment, rating);
+    const offerId = Number(params.id);
+    store.dispatch(fetchAddReviewAction({offerId, comment, rating}));
     setComment('');
     setRating(0);
   };
 
+  // const onSubmitHandle = (evt: FormEvent<HTMLButtonElement>) => {
+  // onClick={onSubmitHandle}
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form onSubmit={onSubmitHandle} className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review {params.id}</label>
       <div className="reviews__rating-form form__rating">
         <input onChange={onChangeRatingHandle} checked={rating === 5} className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
@@ -65,13 +68,13 @@ function ReviewForm(): JSX.Element {
         </label>
       </div>
 
-      <textarea onChange={onChangeCommentHandle} value={comment} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
+      <textarea onChange={onChangeCommentHandle} value={comment} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" maxLength={ReviewLimits.MaxChar}></textarea>
 
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{ReviewLimits.MinChar} characters</b>.
         </p>
-        <button onClick={onSubmitHandle} className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={comment.length < ReviewLimits.MinChar || rating === 0}>Submit</button>
       </div>
     </form>
 

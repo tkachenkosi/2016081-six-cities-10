@@ -16,8 +16,8 @@ export enum AuthorizationStatus {
 
 export enum ReviewLimits {
   MaxCommentPerPage = 10,
-  MinCharactersComment = 50,
-  MaxCharactersComment = 300,
+  MinChar = 50,
+  MaxChar = 300,
 }
 
 export enum HttpCode {
