@@ -8,9 +8,9 @@ type NearCardProps = {
 }
 
 function NearCard({offer, selectMapOffer}: NearCardProps): JSX.Element {
+
   const onMouseEnterHandle = () => {
     selectMapOffer(offer);
-
   };
 
   const onMouseOutHandle = () => {
@@ -18,7 +18,7 @@ function NearCard({offer, selectMapOffer}: NearCardProps): JSX.Element {
   };
 
   return (
-    <article onMouseEnter={onMouseEnterHandle} onMouseOut={onMouseOutHandle} className="near-places__card place-card">
+    <article onMouseEnter={onMouseEnterHandle} onMouseLeave={onMouseOutHandle} className="near-places__card place-card">
       <div className="near-places__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${offer.id}`}>
           <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image" />
