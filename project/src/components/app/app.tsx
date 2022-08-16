@@ -49,6 +49,10 @@ function App(): JSX.Element {
           element={<LoginScreen />}
         />
         <Route
+          path={AppRoute.NotFound}
+          element={<Error404Screen />}
+        />
+        <Route
           path="*"
           element={<Error404Screen />}
         />

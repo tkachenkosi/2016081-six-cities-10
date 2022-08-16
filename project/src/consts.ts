@@ -5,7 +5,8 @@ export enum AppRoute {
   Root = '/',
   Login = '/login',
   Favorite = '/favorite',
-  Room = '/offer/:id'
+  Room = '/offer/:id',
+  NotFound = '/not--found'
 }
 
 export enum AuthorizationStatus {
@@ -102,5 +103,5 @@ export const INIT_OFFER = {
     longitude: 0,
     zoom: 10,
   },
-  id: 666,
+  id: -1,
 };
