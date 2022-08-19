@@ -1,8 +1,8 @@
 import {useState, MouseEvent} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {Offer} from '../../types/offer';
 import {useAppSelector} from '../../hooks';
-import {AuthorizationStatus} from '../../consts';
+import {AppRoute, AuthorizationStatus} from '../../consts';
 import {changeFavoritStatusAction} from '../../store/api-actions';
 import {store} from '../../store/index';
 import {calcRating} from '../../utils';
@@ -15,6 +15,7 @@ type PropertyCardProps = {
 function PlaceCard({offer, selectMapOffer}: PropertyCardProps): JSX.Element {
   const [isFavorite, setFavorite] = useState(offer.isFavorite);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const navigate = useNavigate();
 
   const onFavoriteClick = (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
@@ -23,12 +24,13 @@ function PlaceCard({offer, selectMapOffer}: PropertyCardProps): JSX.Element {
       const status: number = offer.isFavorite ? 0 : 1;
       store.dispatch(changeFavoritStatusAction({hotelId, status}));
       setFavorite(!isFavorite);
+    } else {
+      navigate(AppRoute.Login);
     }
   };
 
   const onMouseEnterHandle = () => {
     selectMapOffer(offer);
-
   };
 
   const onMouseOutHandle = () => {
@@ -36,10 +38,8 @@ function PlaceCard({offer, selectMapOffer}: PropertyCardProps): JSX.Element {
   };
 
   return (
-    <article onMouseEnter={onMouseEnterHandle} onMouseOut={onMouseOutHandle} className="cities__card place-card">
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+    <article onMouseEnter={onMouseEnterHandle} onMouseLeave={onMouseOutHandle} className="cities__card place-card">
+      {offer.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${offer.id}`}>
           <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image" />
@@ -67,7 +67,7 @@ function PlaceCard({offer, selectMapOffer}: PropertyCardProps): JSX.Element {
         <h2 className="place-card__name">
           <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type">{offer.type[0].toUpperCase() + offer.type.slice(1)}</p>
       </div>
     </article>
 

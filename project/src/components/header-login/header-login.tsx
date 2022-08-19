@@ -3,10 +3,16 @@ import {Link} from 'react-router-dom';
 import {AppRoute, TokenKey} from '../../consts';
 import {useAppDispatch} from '../../hooks';
 import {logoutAction} from '../../store/api-actions';
+import {useAppSelector} from '../../hooks';
 import {getToken} from '../../services/token';
+// import {store} from '../../store/index';
 
 function HeaderLogin(): JSX.Element {
   const dispatch = useAppDispatch();
+  const count = useAppSelector((state) => state.countFavorites);
+  // console.log('count', count);
+  // const countF = (count: number) => {count.toString();};
+  // store.subscribe(() => countF(store.getState().countFavorites));
 
   return (
     <nav className="header__nav">
@@ -16,7 +22,7 @@ function HeaderLogin(): JSX.Element {
             <div className="header__avatar-wrapper user__avatar-wrapper">
             </div>
             <span className="header__user-name user__name">{getToken(TokenKey.Email)}</span>
-            <span className="header__favorite-count">3</span>
+            <span className="header__favorite-count">{count}</span>
           </Link>
         </li>
         <li className="header__nav-item">

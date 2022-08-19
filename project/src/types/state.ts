@@ -17,4 +17,5 @@ export type DataStore = {
   reviews: Review[];
   nearbyOffers: Offer[];
   favoriteOffers: Offer[];
+  countFavorites: number;
 };

@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {setSelectCity, setOffers, changeSort, loadOffers, loadNearbyOffers, loadRoomOffer, loadReviews, requireAuthorization, setError, setDataLoadedStatus, changeFavoritStatus, addReview} from './action';
+import {setSelectCity, setOffers, changeSort, loadOffers, loadNearbyOffers, loadRoomOffer, loadReviews, requireAuthorization, setError, setDataLoadedStatus, changeFavoritStatus, addReview, loadFavorites, setCountFavorites} from './action';
 import {DataStore} from '../types/state';
 import {CITIES, SortType, AuthorizationStatus, INIT_OFFER} from '../consts';
 
@@ -15,6 +15,7 @@ const initialState: DataStore = {
   reviews: [],
   nearbyOffers: [],
   favoriteOffers: [],
+  countFavorites: 0,
 };
 
 
@@ -22,6 +23,9 @@ const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setSelectCity, (state, action) => {
       state.selectedCity = action.payload;
+    })
+    .addCase(setCountFavorites, (state, action) => {
+      state.countFavorites = action.payload;
     })
     .addCase(setOffers, (state, action) => {
       state.offers = action.payload;
@@ -31,6 +35,10 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadNearbyOffers, (state, action) => {
       state.nearbyOffers = action.payload;
+    })
+    .addCase(loadFavorites, (state, action) => {
+      state.favoriteOffers = action.payload;
+      state.countFavorites = state.favoriteOffers.length;
     })
     .addCase(loadRoomOffer, (state, action) => {
       state.roomOffer = action.payload;
@@ -61,6 +69,9 @@ const reducer = createReducer(initialState, (builder) => {
       }
       const index = state.offers.findIndex((offer) => offer.id === action.payload.id);
       state.offers = [...state.offers.slice(0, index), action.payload, ...state.offers.slice(index + 1), ];
+
+      state.countFavorites = state.favoriteOffers.length;
+      console.log('->>', state.favoriteOffers.length);
     });
 });
 

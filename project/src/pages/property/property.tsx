@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-// import React from 'react';
+import {useNavigate} from 'react-router-dom';
 import ReviewForm from '../../components/form/form';
 import {useParams} from 'react-router-dom';
 import Header from '../../components/header/header';
@@ -7,25 +7,16 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import NearList from '../../components/near-list/near-list';
 import ImagesGallery from '../../components/images-gallery/images-gallery';
 import MapOffers from '../../components/map/map';
-// import {useAppSelector, useAppDispatch} from '../../hooks';
 import {useAppSelector} from '../../hooks';
-// import {fetchReviewsAction, fetchNearbyOffersAction, fetchRoomOfferAction} from '../../store/api-actions';
 import {fetchReviewsAction, fetchNearbyOffersAction, fetchRoomOfferAction} from '../../store/api-actions';
 import {Offer, Review} from '../../types/offer';
-import {AuthorizationStatus} from '../../consts';
+import {AppRoute, AuthorizationStatus, INIT_OFFER} from '../../consts';
 import {calcRating} from '../../utils';
 import {store} from '../../store/index';
 
-
-// <section className="property__map map">
-// {setTimeout(() => {nearbyOffers.length > 0 && <MapOffers classMap={'property__map map'} offers={nearbyOffers} selectedOffer={offerSelect} />}, 1000)}
-
 function PropertyScreen(): JSX.Element {
   const params = useParams();
-  // const dispatch = useAppDispatch();
-  // const selectCity = useAppSelector((state) => state.selectedCity);
-  // const filteredOffers: Offer[] = useAppSelector((state) => state.offers).filter((offer) => offer.city.name === selectCity);
-  // const offerSelect: Offer = filteredOffers.filter((i) => i.id === Number(params.id))[0];
+  const navigate = useNavigate();
   // основной оффер
   useEffect(() => {
     store.dispatch(fetchRoomOfferAction(params.id));
@@ -47,6 +38,12 @@ function PropertyScreen(): JSX.Element {
   const reviews: Review[] = useAppSelector((state) => state.reviews);
   const nearbyOffers: Offer[] = useAppSelector((state) => state.nearbyOffers);
   const {title, price, type, rating, images, goods, host, description, bedrooms, maxAdults, isPremium} = roomOffer;
+
+  useEffect(() => {
+    if (!roomOffer || roomOffer.id === INIT_OFFER.id) {
+      navigate(AppRoute.NotFound);
+    }
+  }, [params.id]);
 
   return (
     <div className="page">
