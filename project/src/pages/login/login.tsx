@@ -1,15 +1,12 @@
-// import React, {useEffect, useRef, useState} from 'react';
 import React, {useEffect, useRef, FormEvent} from 'react';
 import {Link} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import {store} from '../../store/index';
-import {AppRoute, AuthorizationStatus} from '../../consts';
+import {AppRoute, AuthorizationStatus, CITIES} from '../../consts';
 import {redirectToRoute, setSelectCity} from '../../store/action';
-import {useAppDispatch} from '../../hooks';
-import {useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import Logo from '../../components/logo/logo';
-import {loginAction} from '../../store/api-actions';
-import {CITIES} from '../../consts';
+import {loginAction, fetchFavotiresAction} from '../../store/api-actions';
 import {getRandomInteger} from '../../utils';
 
 function LoginScreen(): JSX.Element {
@@ -29,6 +26,7 @@ function LoginScreen(): JSX.Element {
 
   useEffect(() => {
     if (authorizationStatus === AuthorizationStatus.Auth){
+      store.dispatch(fetchFavotiresAction());
       store.dispatch(redirectToRoute(AppRoute.Root));
     }
   }, [authorizationStatus]);
