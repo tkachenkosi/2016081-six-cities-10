@@ -66,12 +66,12 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(changeFavoritStatus, (state, action) => {
       if (!action.payload.isFavorite) {
         state.favoriteOffers = state.favoriteOffers.filter((offer) => offer.id !== action.payload.id);
+      } else {
+        state.favoriteOffers.push(action.payload);
       }
+      state.countFavorites = state.favoriteOffers.length;
       const index = state.offers.findIndex((offer) => offer.id === action.payload.id);
       state.offers = [...state.offers.slice(0, index), action.payload, ...state.offers.slice(index + 1), ];
-
-      state.countFavorites = state.favoriteOffers.length;
-      console.log('->>', state.favoriteOffers.length);
     });
 });
 
