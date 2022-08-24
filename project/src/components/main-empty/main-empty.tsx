@@ -1,8 +1,9 @@
 import React from 'react';
 import {useAppSelector} from '../../hooks';
+import {getSelectCity} from '../../store/data-process/selectors';
 
 function MainEmpty(): JSX.Element {
-  const selectCity = useAppSelector((state) => state.selectedCity);
+  const selectCity = useAppSelector(getSelectCity);
 
   return (
     <div className="cities__places-container cities__places-container--empty container">

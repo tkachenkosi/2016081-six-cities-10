@@ -13,6 +13,8 @@ import {Offer, Review} from '../../types/offer';
 import {AppRoute, AuthorizationStatus, INIT_OFFER} from '../../consts';
 import {calcRating} from '../../utils';
 import {store} from '../../store/index';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
+import {getReviews, getRoomOffer, getNearbyOffers} from '../../store/data-process/selectors';
 
 function PropertyScreen(): JSX.Element {
   const params = useParams();
@@ -33,17 +35,17 @@ function PropertyScreen(): JSX.Element {
   const [activeMapOffer, setActiveMapOffer] = useState<Offer | null>(null);
   const selectMapOffer = useCallback((offer: Offer | null) => setActiveMapOffer(offer), []);
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const roomOffer: Offer = useAppSelector((state) => state.roomOffer);
-  const reviews: Review[] = useAppSelector((state) => state.reviews);
-  const nearbyOffers: Offer[] = useAppSelector((state) => state.nearbyOffers);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const roomOffer: Offer = useAppSelector(getRoomOffer);
+  const reviews: Review[] = useAppSelector(getReviews);
+  const nearbyOffers: Offer[] = useAppSelector(getNearbyOffers);
   const {title, price, type, rating, images, goods, host, description, bedrooms, maxAdults, isPremium} = roomOffer;
 
   useEffect(() => {
     if (!roomOffer || roomOffer.id === INIT_OFFER.id) {
       navigate(AppRoute.NotFound);
     }
-  }, [params.id]);
+  }, [params.id, roomOffer]);
 
   return (
     <div className="page">

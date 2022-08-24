@@ -33,10 +33,10 @@ export enum TokenKey {
   Email = 'six-cities-user-email',
 }
 
-// export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
-// export const url_marker_current = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
-
-// export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+export enum NameSpace {
+  Data = 'DATA',
+  User = 'USER',
+}
 
 export const CITIES = {
   Paris: 'Paris',

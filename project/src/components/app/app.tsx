@@ -10,14 +10,16 @@ import PrivateRoute from '../../components/private-route/private-route';
 import {useAppSelector} from '../../hooks';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
+import {getLoadedDataStatus} from '../../store/data-process/selectors';
 
 
 const isUnknownAuthStatus = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 
 function App(): JSX.Element {
-
-  const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isDataLoaded = useAppSelector(getLoadedDataStatus);
 
   if (isUnknownAuthStatus(authorizationStatus) || isDataLoaded) {
     return (

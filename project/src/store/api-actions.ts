@@ -1,7 +1,8 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.js';
-import {loadOffers, loadNearbyOffers, loadRoomOffer, loadReviews, requireAuthorization, setError, setDataLoadedStatus, changeFavoritStatus, addReview, loadFavorites} from './action';
+import {requireAuthorization} from './user-process/user-process';
+import {loadOffers, loadNearbyOffers, loadRoomOffer, loadReviews, setError, setDataLoadedStatus, changeFavoritStatus, addReview, loadFavorites} from './data-process/data-process';
 import {saveToken, setToken, dropToken} from '../services/token';
 import {AuthorizationStatus, TIMEOUT_SHOW_ERROR, TokenKey} from '../consts';
 import {AuthData} from '../types/auth-data';

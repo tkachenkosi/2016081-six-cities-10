@@ -3,11 +3,13 @@ import {Link} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import {store} from '../../store/index';
 import {AppRoute, AuthorizationStatus, CITIES} from '../../consts';
-import {redirectToRoute, setSelectCity} from '../../store/action';
+import {redirectToRoute} from '../../store/action';
+import {setSelectCity} from '../../store/data-process/data-process';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import Logo from '../../components/logo/logo';
 import {loginAction, fetchFavotiresAction} from '../../store/api-actions';
 import {getRandomInteger} from '../../utils';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
 
 function LoginScreen(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -15,7 +17,7 @@ function LoginScreen(): JSX.Element {
   const passwdRef = useRef<HTMLInputElement | null>(null);
 
   const validatePasswd = (passwd: string) => passwd.match(/[A-Za-z]/) !== null && passwd.match(/[0-9]/) !== null;
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const randomCity = Object.values(CITIES)[getRandomInteger(0, Object.values(CITIES).length - 1)];
 

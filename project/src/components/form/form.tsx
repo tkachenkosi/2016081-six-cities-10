@@ -25,9 +25,6 @@ function ReviewForm(): JSX.Element {
     setRating(0);
   };
 
-  // const onSubmitHandle = (evt: FormEvent<HTMLButtonElement>) => {
-  // onClick={onSubmitHandle}
-
   return (
     <form onSubmit={onSubmitHandle} className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review {params.id}</label>

@@ -1,13 +1,14 @@
 
 import {useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {changeSort} from '../../store/action';
+import {changeSort} from '../../store/data-process/data-process';
 import {SortType} from '../../consts';
+import {getSortType} from '../../store/data-process/selectors';
 
 
 function SortingOffers(): JSX.Element {
   const dispatch = useAppDispatch();
-  const currentSort = useAppSelector((state) => state.sortType);
+  const currentSort = useAppSelector(getSortType);
   const sortTypeValues = Object.values(SortType);
   const [show, setShow] = useState(false);
 

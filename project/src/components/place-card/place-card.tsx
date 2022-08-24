@@ -6,6 +6,7 @@ import {AppRoute, AuthorizationStatus} from '../../consts';
 import {changeFavoritStatusAction} from '../../store/api-actions';
 import {store} from '../../store/index';
 import {calcRating} from '../../utils';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
 
 type PropertyCardProps = {
   offer: Offer;
@@ -14,7 +15,7 @@ type PropertyCardProps = {
 
 function PlaceCard({offer, selectMapOffer}: PropertyCardProps): JSX.Element {
   const [isFavorite, setFavorite] = useState(offer.isFavorite);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const navigate = useNavigate();
 
   const onFavoriteClick = (evt: MouseEvent<HTMLButtonElement>) => {
@@ -42,7 +43,7 @@ function PlaceCard({offer, selectMapOffer}: PropertyCardProps): JSX.Element {
       {offer.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${offer.id}`}>
-          <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Offer" />
         </Link>
       </div>
       <div className="place-card__info">
