@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {useAppSelector} from '../../hooks';
 import {useAppDispatch} from '../../hooks';
 import {setSelectCity} from '../../store/data-process/data-process';
@@ -16,14 +17,14 @@ function Locations(): JSX.Element {
       <ul className="locations__list tabs__list">
         {citiesName.map((location: string) => (
           <li className="locations__item" key={location}>
-            <a className={`locations__item-link tabs__item ${location === selectCity && 'tabs__item--active'}`} href="/"
+            <Link className={`locations__item-link tabs__item ${location === selectCity && 'tabs__item--active'}`} to={'/'}
               onClick={(evt) => {
                 evt.preventDefault();
                 dispatch(setSelectCity(location));
               }}
             >
               <span>{location}</span>
-            </a>
+            </Link>
           </li>
         ),
         )}

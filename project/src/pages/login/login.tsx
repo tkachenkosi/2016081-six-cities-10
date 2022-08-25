@@ -7,7 +7,7 @@ import {redirectToRoute} from '../../store/action';
 import {setSelectCity} from '../../store/data-process/data-process';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import Logo from '../../components/logo/logo';
-import {loginAction, fetchFavotiresAction} from '../../store/api-actions';
+import {loginAction, fetchFavotiresAction, fetchOffersAction} from '../../store/api-actions';
 import {getRandomInteger} from '../../utils';
 import {getAuthorizationStatus} from '../../store/user-process/selectors';
 
@@ -28,6 +28,7 @@ function LoginScreen(): JSX.Element {
 
   useEffect(() => {
     if (authorizationStatus === AuthorizationStatus.Auth){
+      store.dispatch(fetchOffersAction());
       store.dispatch(fetchFavotiresAction());
       store.dispatch(redirectToRoute(AppRoute.Root));
     }
@@ -40,6 +41,7 @@ function LoginScreen(): JSX.Element {
     if (loginRef.current && passwdRef.current) {
       if (validatePasswd(passwdRef.current.value)) {
         dispatch(loginAction({login: loginRef.current.value, password: passwdRef.current.value}));
+        // store.dispatch(fetchFavotiresAction());
       } else {
         toast.error('Password должен содержать символы и цифры');
       }

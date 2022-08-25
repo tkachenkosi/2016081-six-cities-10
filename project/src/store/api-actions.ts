@@ -55,7 +55,9 @@ export const fetchRoomOfferAction = createAsyncThunk<void, string | undefined, {
   'data/fetchRoomOffer',
   async (offerId, {dispatch, extra: api}) => {
     const {data} = await api.get<Offer>(`${APIRoute.Offers}/${offerId}`);
+    dispatch(setDataLoadedStatus(true));
     dispatch(loadRoomOffer(data));
+    dispatch(setDataLoadedStatus(false));
   },
 );
 

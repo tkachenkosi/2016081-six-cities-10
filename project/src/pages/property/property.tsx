@@ -10,25 +10,21 @@ import MapOffers from '../../components/map/map';
 import {useAppSelector} from '../../hooks';
 import {fetchReviewsAction, fetchNearbyOffersAction, fetchRoomOfferAction} from '../../store/api-actions';
 import {Offer, Review} from '../../types/offer';
-import {AppRoute, AuthorizationStatus, INIT_OFFER} from '../../consts';
+// import {AppRoute, AuthorizationStatus, INIT_OFFER} from '../../consts';
+import {AppRoute, AuthorizationStatus} from '../../consts';
 import {calcRating} from '../../utils';
 import {store} from '../../store/index';
 import {getAuthorizationStatus} from '../../store/user-process/selectors';
-import {getReviews, getRoomOffer, getNearbyOffers} from '../../store/data-process/selectors';
+import {getReviews, getRoomOffer, getNearbyOffers, getLoadedDataStatus} from '../../store/data-process/selectors';
 
 function PropertyScreen(): JSX.Element {
   const params = useParams();
   const navigate = useNavigate();
-  // основной оффер
+  // store.dispatch(setDataLoadedStatus(true));
+
   useEffect(() => {
     store.dispatch(fetchRoomOfferAction(params.id));
-  }, [params.id]);
-  // комментарии
-  useEffect(() => {
     store.dispatch(fetchReviewsAction(params.id));
-  }, [params.id]);
-  // офферы радом
-  useEffect(() => {
     store.dispatch(fetchNearbyOffersAction(params.id));
   }, [params.id]);
 
@@ -39,13 +35,14 @@ function PropertyScreen(): JSX.Element {
   const roomOffer: Offer = useAppSelector(getRoomOffer);
   const reviews: Review[] = useAppSelector(getReviews);
   const nearbyOffers: Offer[] = useAppSelector(getNearbyOffers);
+  const isDataLoaded = useAppSelector(getLoadedDataStatus);
   const {title, price, type, rating, images, goods, host, description, bedrooms, maxAdults, isPremium} = roomOffer;
 
   useEffect(() => {
-    if (!roomOffer || roomOffer.id === INIT_OFFER.id) {
+    if (isDataLoaded) {
       navigate(AppRoute.NotFound);
     }
-  }, [params.id, roomOffer]);
+  }, [isDataLoaded]);
 
   return (
     <div className="page">
