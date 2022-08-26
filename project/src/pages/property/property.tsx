@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect, useCallback, MouseEvent} from 'react';
 import {useNavigate} from 'react-router-dom';
 import ReviewForm from '../../components/form/form';
 import {useParams} from 'react-router-dom';
@@ -8,9 +8,8 @@ import NearList from '../../components/near-list/near-list';
 import ImagesGallery from '../../components/images-gallery/images-gallery';
 import MapOffers from '../../components/map/map';
 import {useAppSelector} from '../../hooks';
-import {fetchReviewsAction, fetchNearbyOffersAction, fetchRoomOfferAction} from '../../store/api-actions';
+import {fetchReviewsAction, fetchNearbyOffersAction, fetchRoomOfferAction, changeFavoritStatusAction} from '../../store/api-actions';
 import {Offer, Review} from '../../types/offer';
-// import {AppRoute, AuthorizationStatus, INIT_OFFER} from '../../consts';
 import {AppRoute, AuthorizationStatus} from '../../consts';
 import {calcRating} from '../../utils';
 import {store} from '../../store/index';
@@ -20,7 +19,6 @@ import {getReviews, getRoomOffer, getNearbyOffers, getLoadedDataStatus} from '..
 function PropertyScreen(): JSX.Element {
   const params = useParams();
   const navigate = useNavigate();
-  // store.dispatch(setDataLoadedStatus(true));
 
   useEffect(() => {
     store.dispatch(fetchRoomOfferAction(params.id));
@@ -36,7 +34,20 @@ function PropertyScreen(): JSX.Element {
   const reviews: Review[] = useAppSelector(getReviews);
   const nearbyOffers: Offer[] = useAppSelector(getNearbyOffers);
   const isDataLoaded = useAppSelector(getLoadedDataStatus);
-  const {title, price, type, rating, images, goods, host, description, bedrooms, maxAdults, isPremium} = roomOffer;
+  const {id, title, price, type, rating, images, goods, host, description, bedrooms, maxAdults, isPremium, isFavorite} = roomOffer;
+  const [isFav, setFavorite] = useState(isFavorite);
+
+  const onFavoriteClick = (evt: MouseEvent<HTMLButtonElement>) => {
+    evt.preventDefault();
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      const hotelId: number = id;
+      const status: number = isFavorite ? 0 : 1;
+      store.dispatch(changeFavoritStatusAction({hotelId, status}));
+      setFavorite(!isFav);
+    } else {
+      navigate(AppRoute.Login);
+    }
+  };
 
   useEffect(() => {
     if (isDataLoaded) {
@@ -62,7 +73,7 @@ function PropertyScreen(): JSX.Element {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
+                <button onClick={onFavoriteClick} className={`property__bookmark-button ${isFavorite && authorizationStatus === AuthorizationStatus.Auth && 'property__bookmark-button--active'} button`} type="button">
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>

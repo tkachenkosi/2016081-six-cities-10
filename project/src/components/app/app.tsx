@@ -1,3 +1,4 @@
+import React, {useEffect} from 'react';
 import {Route, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../consts';
 import MainScreen from '../../pages/main/main';
@@ -12,6 +13,8 @@ import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import {getAuthorizationStatus} from '../../store/user-process/selectors';
 import {getLoadedDataStatus} from '../../store/data-process/selectors';
+import {checkAuthAction, fetchOffersAction, fetchFavotiresAction} from '../../store/api-actions';
+import {store} from '../../store/index';
 
 
 const isUnknownAuthStatus = (authorizationStatus: AuthorizationStatus): boolean =>
@@ -20,6 +23,12 @@ const isUnknownAuthStatus = (authorizationStatus: AuthorizationStatus): boolean 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isDataLoaded = useAppSelector(getLoadedDataStatus);
+
+  useEffect(() => {
+    store.dispatch(fetchOffersAction());
+    store.dispatch(checkAuthAction());
+    store.dispatch(fetchFavotiresAction());
+  }, []);
 
   if (isUnknownAuthStatus(authorizationStatus) || isDataLoaded) {
     return (
