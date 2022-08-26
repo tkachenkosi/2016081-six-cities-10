@@ -1,15 +1,11 @@
 import React from 'react';
 import {Offer} from '../../types/offer';
 import PlaceCard from '../place-card/place-card';
-// import {useAppSelector} from '../../hooks';
 
 type ListProps = {
   offers: Offer[];
   selectMapOffer: (offer: Offer | null) => void;
 }
-
-// <React.Fragment>
-// </ React.Fragment>
 
 function PlacesList({offers, selectMapOffer}: ListProps): JSX.Element {
   return (

@@ -6,12 +6,16 @@ export type State = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
 
-export type DataStore = {
+
+export type UserProcess = {
+  authorizationStatus: AuthorizationStatus;
+}
+
+export type DataProcess = {
   selectedCity: string;
   offers: Offer[];
   roomOffer: Offer;
   sortType: string;
-  authorizationStatus: AuthorizationStatus;
   isDataLoaded: boolean;
   error: string | null;
   reviews: Review[];
@@ -19,3 +23,4 @@ export type DataStore = {
   favoriteOffers: Offer[];
   countFavorites: number;
 };
+

@@ -5,14 +5,15 @@ import Locations from '../../components/locations/locations';
 import {Offer} from '../../types/offer';
 import {useAppSelector} from '../../hooks';
 import {SortType} from '../../consts';
+import {getSelectCity, getSortType, getOffers} from '../../store/data-process/selectors';
 
 
 function MainScreen(): JSX.Element {
-  const selectCity = useAppSelector((state) => state.selectedCity);
-  const filteredOffers: Offer[] = useAppSelector((state) => state.offers).filter((offer) => offer.city.name === selectCity);
+  const selectCity = useAppSelector(getSelectCity);
+  const filteredOffers: Offer[] = useAppSelector(getOffers).filter((offer) => offer.city.name === selectCity);
   const offersCount = filteredOffers.length;
 
-  switch (useAppSelector((state) => state.sortType)) {
+  switch (useAppSelector(getSortType)) {
     case SortType.PRICE_TO_HIGH:
       filteredOffers.sort((a, b) => a.price - b.price );
       break;

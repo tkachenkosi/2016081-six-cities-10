@@ -5,14 +5,11 @@ import {useAppDispatch} from '../../hooks';
 import {logoutAction} from '../../store/api-actions';
 import {useAppSelector} from '../../hooks';
 import {getToken} from '../../services/token';
-// import {store} from '../../store/index';
+import {getCountFavorites} from '../../store/data-process/selectors';
 
 function HeaderLogin(): JSX.Element {
   const dispatch = useAppDispatch();
-  const count = useAppSelector((state) => state.countFavorites);
-  // console.log('count', count);
-  // const countF = (count: number) => {count.toString();};
-  // store.subscribe(() => countF(store.getState().countFavorites));
+  const count = useAppSelector(getCountFavorites);
 
   return (
     <nav className="header__nav">

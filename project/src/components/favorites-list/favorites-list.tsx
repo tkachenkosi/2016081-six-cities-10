@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import {Offer} from '../../types/offer';
 import {AppRoute,CITIES} from '../../consts';
 import FavoriteCard from '../favorite-card/favorite-card';
-import {setSelectCity} from '../../store/action';
+import {setSelectCity} from '../../store/data-process/data-process';
 import {store} from '../../store/index';
 
 type ListProps = {

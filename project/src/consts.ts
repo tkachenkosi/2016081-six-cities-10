@@ -1,5 +1,6 @@
 export const RATING_STEP = 20;
 export const TIMEOUT_SHOW_ERROR = 2000;
+export const AVATAR_USER = 'img/avatar-angelina.jpg';
 
 export enum AppRoute {
   Root = '/',
@@ -33,10 +34,10 @@ export enum TokenKey {
   Email = 'six-cities-user-email',
 }
 
-// export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
-// export const url_marker_current = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
-
-// export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+export enum NameSpace {
+  Data = 'DATA',
+  User = 'USER',
+}
 
 export const CITIES = {
   Paris: 'Paris',

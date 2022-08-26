@@ -8,17 +8,16 @@ import {fetchFavotiresAction} from '../../store/api-actions';
 import {useAppSelector} from '../../hooks';
 import {Offer} from '../../types/offer';
 import {store} from '../../store/index';
+import {getFavoriteOffers} from '../../store/data-process/selectors';
 
 
 function FavoritesScreen(): JSX.Element {
-  // const selectCity = useAppSelector((state) => state.selectedCity);
-  // const offers: Offer[] = useAppSelector((state) => state.offers).filter((offer) => offer.city.name === selectCity);
 
   useEffect(() => {
     store.dispatch(fetchFavotiresAction());
   }, []);
 
-  const offers: Offer[] = useAppSelector((state) => state.favoriteOffers);
+  const offers: Offer[] = useAppSelector(getFavoriteOffers);
 
   return (
     <div className={`page ${offers.length === 0 && 'page--favorites-empty'}`}>
