@@ -1,12 +1,12 @@
 import React, {useState, useEffect, useCallback, MouseEvent} from 'react';
 import {useNavigate} from 'react-router-dom';
-import ReviewForm from '../../components/form/form';
+import ReviewForm from '../../components/review-form/review-form';
 import {useParams} from 'react-router-dom';
 import Header from '../../components/header/header';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import NearList from '../../components/near-list/near-list';
 import ImagesGallery from '../../components/images-gallery/images-gallery';
-import MapOffers from '../../components/map/map';
+import MapOffers from '../../components/map-offers/map-offers';
 import {useAppSelector} from '../../hooks';
 import {fetchReviewsAction, fetchNearbyOffersAction, fetchRoomOfferAction, changeFavoritStatusAction} from '../../store/api-actions';
 import {Offer, Review} from '../../types/offer';

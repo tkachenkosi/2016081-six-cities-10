@@ -1,7 +1,7 @@
 import {useCallback, useState} from 'react';
 import PlacesList from '../../components/places-list/places-list';
-import SortingOffers from '../../components/sorting/sorting';
-import MapOffers from '../../components/map/map';
+import SortingOffers from '../../components/sorting-offers/sorting-offers';
+import MapOffers from '../../components/map-offers/map-offers';
 import {Offer} from '../../types/offer';
 
 

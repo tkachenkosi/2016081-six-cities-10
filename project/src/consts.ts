@@ -1,6 +1,5 @@
 export const RATING_STEP = 20;
 export const TIMEOUT_SHOW_ERROR = 2000;
-export const AVATAR_USER = 'img/avatar-angelina.jpg';
 
 export enum AppRoute {
   Root = '/',

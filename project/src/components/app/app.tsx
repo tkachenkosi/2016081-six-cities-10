@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
 import {Route, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../consts';
-import MainScreen from '../../pages/main/main';
-import FavoritesScreen from '../../pages/favorites/favorites';
-import PropertyScreen from '../../pages/property/property';
-import LoginScreen from '../../pages/login/login';
+import MainScreen from '../../pages/main-screen/main-screen';
+import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
+import PropertyScreen from '../../pages/property-screen/property-screen';
+import LoginScreen from '../../pages/login-screen/login-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
-import Error404Screen from '../../pages/404/404';
+import Error404Screen from '../../pages/error404-screen/error404-screen';
 import PrivateRoute from '../../components/private-route/private-route';
 import {useAppSelector} from '../../hooks';
 import HistoryRouter from '../history-route/history-route';
