@@ -1,0 +1,17 @@
+.error-section {
+  background-color: #f0f0f0;
+  text-align: center;
+  font-family: 'Tahoma';
+}
+
+.error-logo {
+  margin: 5px 15px;
+}
+
+.error-title {
+  color: #c83349;
+}
+
+.error-link {
+  color: blue;
+}
