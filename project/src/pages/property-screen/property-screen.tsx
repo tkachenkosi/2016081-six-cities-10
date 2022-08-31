@@ -56,7 +56,7 @@ function PropertyScreen(): JSX.Element {
   }, [isDataLoaded]);
 
   return (
-    <div className="page">
+    <div className="page" data-testid="property-page">
       <Header />
 
       <main className="page__main page__main--property">
